@@ -1,7 +1,6 @@
-[submodule "my_libs"]
-	path = ./STM32_Libs
+[submodule "STM32_Libs"]
+	path = STM32_Libs
 	url = https://github.com/FeelMySkin/STM32_Libs.git
-
 [submodule "STM32_Core"]
-	path = ./Core
+	path = Core
 	url = https://github.com/STMicroelectronics/STM32CubeF0.git
