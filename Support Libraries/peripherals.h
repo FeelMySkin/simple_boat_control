@@ -11,7 +11,7 @@
 #ifndef PERIPHERALS_H
 #define PERIPHERALS_H
 
-#include "periph_use.h"
+#include "periph_functions.h"
 
 /**
  * @defgroup GPIOs

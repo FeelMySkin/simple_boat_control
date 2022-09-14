@@ -1,0 +1,150 @@
+{
+  "name": "boat",
+  "type": "ARM",
+  "dependenceList": [],
+  "srcDirs": [
+    ".eide/deps"
+  ],
+  "virtualFolder": {
+    "name": "<virtual_root>",
+    "files": [],
+    "folders": [
+      {
+        "name": "Source Group 1",
+        "files": [
+          {
+            "path": "defines.h"
+          },
+          {
+            "path": "Source.cpp"
+          },
+          {
+            "path": "Source.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Support",
+        "files": [
+          {
+            "path": "STM32_Libs/F0/Help Functions/periph_functions.cpp"
+          },
+          {
+            "path": "STM32_Libs/F0/Help Functions/periph_functions.h"
+          },
+          {
+            "path": "Support Libraries/peripherals.cpp"
+          },
+          {
+            "path": "Support Libraries/peripherals.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "System",
+        "files": [
+          {
+            "path": "Core/Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f030x6.h"
+          },
+          {
+            "path": "Core/Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h"
+          },
+          {
+            "path": "Core/Drivers/CMSIS/Device/ST/STM32F0xx/Include/system_stm32f0xx.h"
+          },
+          {
+            "path": "Core/Drivers/CMSIS/Device/ST/STM32F0xx/Source/Templates/arm/startup_stm32f030x6.s"
+          },
+          {
+            "path": "Core/Drivers/CMSIS/Device/ST/STM32F0xx/Source/Templates/system_stm32f0xx.c"
+          }
+        ],
+        "folders": []
+      }
+    ]
+  },
+  "outDir": "Objects",
+  "deviceName": null,
+  "packDir": null,
+  "miscInfo": {
+    "uid": "fb17c1e30a60a735ceb0fa51ffc2db46"
+  },
+  "targets": {
+    "Target 1": {
+      "excludeList": [],
+      "toolchain": "AC5",
+      "compileConfig": {
+        "cpuType": "Cortex-M0",
+        "floatingPointHardware": "none",
+        "useCustomScatterFile": false,
+        "scatterFilePath": "<YOUR_SCATTER_FILE>.sct",
+        "storageLayout": {
+          "RAM": [
+            {
+              "tag": "IRAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x20000000",
+                "size": "0x5000"
+              },
+              "isChecked": true,
+              "noInit": false
+            }
+          ],
+          "ROM": [
+            {
+              "tag": "IROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x08000000",
+                "size": "0x10000"
+              },
+              "isChecked": true,
+              "isStartup": true
+            }
+          ]
+        },
+        "options": "null"
+      },
+      "uploader": "JLink",
+      "uploadConfig": {
+        "bin": "",
+        "baseAddr": "",
+        "cpuInfo": {
+          "vendor": "null",
+          "cpuName": "null"
+        },
+        "proType": 1,
+        "speed": 8000,
+        "otherCmds": ""
+      },
+      "uploadConfigMap": {},
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          ".",
+          "Core/Drivers/CMSIS/Core/Include",
+          "Core/Drivers/CMSIS/Device/ST/STM32F0xx/Include",
+          "Core/Drivers/CMSIS/Device/ST/STM32F0xx/Source/Templates/arm",
+          "Core/Drivers/STM32F0xx_HAL_Driver/Inc",
+          "Core/Drivers/STM32F0xx_HAL_Driver/Src",
+          "Support Libraries",
+          "STM32_Libs/F0/Help Functions",
+          "STM32_Libs/F0/Hardware Controllers",
+          ".cmsis/dsp_lib",
+          ".cmsis/include",
+          "RTE/_Target 1",
+          ".eide/deps"
+        ],
+        "libList": [],
+        "sourceDirList": [],
+        "defineList": [
+          "STM32F030x6"
+        ]
+      }
+    }
+  },
+  "version": "3.3"
+}

@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F030x6</Define>
               <Undefine></Undefine>
-              <IncludePath>./;.\Core\Drivers\CMSIS\Core\Include;.\Core\Drivers\CMSIS\Device\ST\STM32F0xx\Include;.\Core\Drivers\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm;.\Core\Drivers\STM32F0xx_HAL_Driver\Inc;.\Core\Drivers\STM32F0xx_HAL_Driver\Src</IncludePath>
+              <IncludePath>.\;.\Core\Drivers\CMSIS\Core\Include;.\Core\Drivers\CMSIS\Device\ST\STM32F0xx\Include;.\Core\Drivers\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm;.\Core\Drivers\STM32F0xx_HAL_Driver\Inc;.\Core\Drivers\STM32F0xx_HAL_Driver\Src;.\Support Libraries;.\STM32_Libs\F0\Help Functions;.\STM32_Libs\F0\Hardware Controllers</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -388,10 +388,20 @@
               <FileType>8</FileType>
               <FilePath>.\Source.cpp</FilePath>
             </File>
+            <File>
+              <FileName>defines.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\defines.h</FilePath>
+            </File>
+            <File>
+              <FileName>Source.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>New Group</GroupName>
+          <GroupName>System</GroupName>
           <Files>
             <File>
               <FileName>system_stm32f0xx.h</FileName>
@@ -417,6 +427,31 @@
               <FileName>startup_stm32f030x6.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\Core\Drivers\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f030x6.s</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Support</GroupName>
+          <Files>
+            <File>
+              <FileName>peripherals.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\Support Libraries\peripherals.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>peripherals.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Support Libraries\peripherals.h</FilePath>
+            </File>
+            <File>
+              <FileName>periph_functions.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\STM32_Libs\F0\Help Functions\periph_functions.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>periph_functions.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\STM32_Libs\F0\Help Functions\periph_functions.h</FilePath>
             </File>
           </Files>
         </Group>
