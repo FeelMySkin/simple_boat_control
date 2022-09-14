@@ -1,5 +1,4 @@
 /Objects/*
-!/Objects/*.sct
-/*.txt
-/DebugConfig/*
-!/Objects/Target\ 1/boat.sct
+!*.sct
+*.txt
+DebugConfig

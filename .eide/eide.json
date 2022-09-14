@@ -133,9 +133,6 @@
           "Support Libraries",
           "STM32_Libs/F0/Help Functions",
           "STM32_Libs/F0/Hardware Controllers",
-          ".cmsis/dsp_lib",
-          ".cmsis/include",
-          "RTE/_Target 1",
           ".eide/deps"
         ],
         "libList": [],
