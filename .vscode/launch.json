@@ -2,15 +2,26 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "cwd": "${workspaceFolder}",
+            "executable": "./Objects/Target 1/boat.bin",
+            "name": "Debug with JLink",
+            "request": "launch",
+            "type": "cortex-debug",
+            "device": "STM32F030F4",
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none",
+            "servertype": "jlink"
+        },
+        {
             "cwd": "${workspaceRoot}",
             "type": "cortex-debug",
             "request": "launch",
             "name": "jlink",
             "servertype": "jlink",
             "interface": "swd",
-            "executable": "Objects\\Target 1\\boat.elf",
+            "executable": "Objects\\Target 1\\boat.axf",
             "runToEntryPoint": "main",
-            "device": "null"
+            "device": "STM32F030F4"
         }
     ]
 }

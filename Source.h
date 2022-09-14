@@ -12,6 +12,12 @@
 #define SOURCE_H
 
 #include "defines.h"
+#include "sbus_controller.h"
 
+SbusController sbus;
+
+void InitRCC();
+void InitPeriph();
+void InitSBUS();
 
 #endif
