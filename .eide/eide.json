@@ -2,79 +2,21 @@
   "name": "boat",
   "type": "ARM",
   "dependenceList": [],
-  "srcDirs": [],
+  "srcDirs": [
+    ".eide/deps"
+  ],
   "virtualFolder": {
     "name": "<virtual_root>",
     "files": [],
     "folders": [
       {
-        "name": "Hardware Libraries",
+        "name": "Hardware Controllers",
         "files": [
+          {
+            "path": "Hardware Libraries/pwm_controller.cpp"
+          },
           {
             "path": "Hardware Libraries/sbus_controller.cpp"
-          },
-          {
-            "path": "Hardware Libraries/sbus_controller.h"
-          }
-        ],
-        "folders": []
-      },
-      {
-        "name": "LL",
-        "files": [
-          {
-            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c"
-          },
-          {
-            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_adc.c"
-          },
-          {
-            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_comp.c"
-          },
-          {
-            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_crc.c"
-          },
-          {
-            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_crs.c"
-          },
-          {
-            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_dac.c"
-          },
-          {
-            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_dma.c"
-          },
-          {
-            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_exti.c"
-          },
-          {
-            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_gpio.c"
-          },
-          {
-            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_i2c.c"
-          },
-          {
-            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_pwr.c"
-          },
-          {
-            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_rcc.c"
-          },
-          {
-            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_rtc.c"
-          },
-          {
-            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_spi.c"
-          },
-          {
-            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_tim.c"
-          },
-          {
-            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_usart.c"
-          },
-          {
-            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_usb.c"
-          },
-          {
-            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_utils.c"
           }
         ],
         "folders": []
@@ -210,8 +152,7 @@
         "sourceDirList": [],
         "defineList": [
           "STM32F030x6",
-          "USE_FULL_LL_DRIVER",
-          "__STM32F0xx_HAL_H"
+          "USE_FULL_LL_DRIVER"
         ]
       }
     }

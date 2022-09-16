@@ -3,14 +3,15 @@
     "configurations": [
         {
             "cwd": "${workspaceFolder}",
-            "executable": "./Objects/Target 1/boat.bin",
+            "executable": "Objects\\Target 1\\boat.elf",
             "name": "Debug with JLink",
             "request": "launch",
             "type": "cortex-debug",
             "device": "STM32F030F4",
             "runToEntryPoint": "main",
             "showDevDebugOutput": "none",
-            "servertype": "jlink"
+            "servertype": "jlink",
+            "interface": "swd"
         },
         {
             "cwd": "${workspaceRoot}",
