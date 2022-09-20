@@ -34,13 +34,13 @@ class PwmController
 {
     public:
         void Init(PwmController_InitTypeDef* init);
-        void SetDuty(uint8_t percent);
+        void SetDuty(float percent);
 
     private:
         void InitGPIO(PwmController_InitTypeDef* init);
         void InitTIM(PwmController_InitTypeDef* init);
-        void CountPrescaler(uint32_t freq);
-        void CountAutoreload(uint32_t freq);
+        uint32_t CountPrescaler(uint32_t freq);
+        uint32_t CountAutoreload(uint32_t freq);
 
         PwmController_PrivateInit init;
 };

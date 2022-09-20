@@ -22,6 +22,63 @@
         "folders": []
       },
       {
+        "name": "LL",
+        "files": [
+          {
+            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_adc.c"
+          },
+          {
+            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_comp.c"
+          },
+          {
+            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_crc.c"
+          },
+          {
+            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_crs.c"
+          },
+          {
+            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_dac.c"
+          },
+          {
+            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_dma.c"
+          },
+          {
+            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_exti.c"
+          },
+          {
+            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_gpio.c"
+          },
+          {
+            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_i2c.c"
+          },
+          {
+            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_pwr.c"
+          },
+          {
+            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_rcc.c"
+          },
+          {
+            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_rtc.c"
+          },
+          {
+            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_spi.c"
+          },
+          {
+            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_tim.c"
+          },
+          {
+            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_usart.c"
+          },
+          {
+            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_usb.c"
+          },
+          {
+            "path": "Core/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_utils.c"
+          }
+        ],
+        "folders": []
+      },
+      {
         "name": "Source Group 1",
         "files": [
           {
@@ -85,7 +142,9 @@
   },
   "targets": {
     "Target 1": {
-      "excludeList": [],
+      "excludeList": [
+        "<virtual_root>/LL/stm32f0xx_ll_usb.c"
+      ],
       "toolchain": "AC5",
       "compileConfig": {
         "cpuType": "Cortex-M0",

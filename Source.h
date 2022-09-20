@@ -13,11 +13,15 @@
 
 #include "defines.h"
 #include "sbus_controller.h"
+#include "pwm_controller.h"
 
 SbusController sbus;
+PwmController motor_pwm, servo_pwm;
+
 
 void InitRCC();
 void InitPeriph();
 void InitSBUS();
+void InitPWMs();
 
 #endif

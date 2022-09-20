@@ -1,46 +1,43 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="project_projx.xsd">
-
   <SchemaVersion>2.1</SchemaVersion>
-
   <Header>### uVision Project, (C) Keil Software</Header>
-
   <Targets>
     <Target>
-      <TargetName>Target 1</TargetName>
+      <TargetName>boat</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060960::V5.06 update 7 (build 960)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
-          <Device>STM32F030F4Px</Device>
-          <Vendor>STMicroelectronics</Vendor>
+          <Device/>
+          <Vendor/>
           <PackID>Keil.STM32F0xx_DFP.2.1.1</PackID>
           <PackURL>https://www.keil.com/pack/</PackURL>
-          <Cpu>IRAM(0x20000000,0x00001000) IROM(0x08000000,0x00004000) CPUTYPE("Cortex-M0") CLOCK(12000000) ELITTLE</Cpu>
-          <FlashUtilSpec></FlashUtilSpec>
-          <StartupFile></StartupFile>
+          <Cpu>IRAM(0x20000000,0x00001000) IROM(0x08000000,0x00004000) CPUTYPE(&quot;Cortex-M0&quot;) CLOCK(12000000) ELITTLE</Cpu>
+          <FlashUtilSpec/>
+          <StartupFile/>
           <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F0xx_16 -FS08000000 -FL04000 -FP0($$Device:STM32F030F4Px$CMSIS\Flash\STM32F0xx_16.FLM))</FlashDriverDll>
           <DeviceId>0</DeviceId>
           <RegisterFile>$$Device:STM32F030F4Px$Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h</RegisterFile>
-          <MemoryEnv></MemoryEnv>
-          <Cmp></Cmp>
-          <Asm></Asm>
-          <Linker></Linker>
-          <OHString></OHString>
-          <InfinionOptionDll></InfinionOptionDll>
-          <SLE66CMisc></SLE66CMisc>
-          <SLE66AMisc></SLE66AMisc>
-          <SLE66LinkerMisc></SLE66LinkerMisc>
+          <MemoryEnv/>
+          <Cmp/>
+          <Asm/>
+          <Linker/>
+          <OHString/>
+          <InfinionOptionDll/>
+          <SLE66CMisc/>
+          <SLE66AMisc/>
+          <SLE66LinkerMisc/>
           <SFDFile>$$Device:STM32F030F4Px$CMSIS\SVD\STM32F0x0.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
-          <BinPath></BinPath>
-          <IncludePath></IncludePath>
-          <LibPath></LibPath>
-          <RegisterFilePath></RegisterFilePath>
-          <DBRegisterFilePath></DBRegisterFilePath>
+          <BinPath/>
+          <IncludePath/>
+          <LibPath/>
+          <RegisterFilePath/>
+          <DBRegisterFilePath/>
           <TargetStatus>
             <Error>0</Error>
             <ExitCodeStop>0</ExitCodeStop>
@@ -48,22 +45,22 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\Objects\</OutputDirectory>
+          <OutputDirectory>.\Objects\Keil\</OutputDirectory>
           <OutputName>boat</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>.\Listings\</ListingPath>
+          <ListingPath>.\Objects\Keil\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
           <BeforeCompile>
             <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
-            <UserProg2Name></UserProg2Name>
+            <UserProg1Name/>
+            <UserProg2Name/>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopU1X>0</nStopU1X>
@@ -72,8 +69,8 @@
           <BeforeMake>
             <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
-            <UserProg2Name></UserProg2Name>
+            <UserProg1Name/>
+            <UserProg2Name/>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopB1X>0</nStopB1X>
@@ -82,15 +79,15 @@
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
-            <UserProg2Name></UserProg2Name>
+            <UserProg1Name/>
+            <UserProg2Name/>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopA1X>0</nStopA1X>
             <nStopA2X>0</nStopA2X>
           </AfterMake>
           <SelectedForBatchBuild>0</SelectedForBatchBuild>
-          <SVCSIdString></SVCSIdString>
+          <SVCSIdString/>
         </TargetCommonOption>
         <CommonProperty>
           <UseCPPCompiler>0</UseCPPCompiler>
@@ -104,17 +101,17 @@
           <AssembleAssemblyFile>0</AssembleAssemblyFile>
           <PublicsOnly>0</PublicsOnly>
           <StopOnExitCode>3</StopOnExitCode>
-          <CustomArgument></CustomArgument>
-          <IncludeLibraryModules></IncludeLibraryModules>
+          <CustomArgument/>
+          <IncludeLibraryModules/>
           <ComprImg>1</ComprImg>
         </CommonProperty>
         <DllOption>
           <SimDllName>SARMCM3.DLL</SimDllName>
-          <SimDllArguments> -REMAP </SimDllArguments>
+          <SimDllArguments>-REMAP</SimDllArguments>
           <SimDlgDll>DARMCM1.DLL</SimDlgDll>
           <SimDlgDllArguments>-pCM0</SimDlgDllArguments>
           <TargetDllName>SARMCM3.DLL</TargetDllName>
-          <TargetDllArguments> </TargetDllArguments>
+          <TargetDllArguments/>
           <TargetDlgDll>TARMCM1.DLL</TargetDlgDll>
           <TargetDlgDllArguments>-pCM0</TargetDlgDllArguments>
         </DllOption>
@@ -138,11 +135,11 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
-          <Flash4></Flash4>
-          <pFcarmOut></pFcarmOut>
-          <pFcarmGrp></pFcarmGrp>
-          <pFcArmRoot></pFcArmRoot>
+          <Flash3/>
+          <Flash4/>
+          <pFcarmOut/>
+          <pFcarmGrp/>
+          <pFcArmRoot/>
           <FcArmLst>0</FcArmLst>
         </Utilities>
         <TargetArmAds>
@@ -174,8 +171,8 @@
             <AdsLsxf>1</AdsLsxf>
             <RvctClst>0</RvctClst>
             <GenPPlst>0</GenPPlst>
-            <AdsCpuType>"Cortex-M0"</AdsCpuType>
-            <RvctDeviceName></RvctDeviceName>
+            <AdsCpuType>&quot;Cortex-M0&quot;</AdsCpuType>
+            <RvctDeviceName/>
             <mOS>0</mOS>
             <uocRom>0</uocRom>
             <uocRam>0</uocRam>
@@ -183,13 +180,13 @@
             <hadIRAM>1</hadIRAM>
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
-            <RvdsVP>0</RvdsVP>
+            <RvdsVP>1</RvdsVP>
             <RvdsMve>0</RvdsMve>
             <RvdsCdeCp>0</RvdsCdeCp>
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
-            <StupSel>8</StupSel>
-            <useUlib>0</useUlib>
+            <StupSel>1</StupSel>
+            <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <nSecure>0</nSecure>
@@ -202,15 +199,15 @@
             <NoZi3>0</NoZi3>
             <NoZi4>0</NoZi4>
             <NoZi5>0</NoZi5>
-            <Ro1Chk>0</Ro1Chk>
+            <Ro1Chk>1</Ro1Chk>
             <Ro2Chk>0</Ro2Chk>
             <Ro3Chk>0</Ro3Chk>
-            <Ir1Chk>1</Ir1Chk>
+            <Ir1Chk>0</Ir1Chk>
             <Ir2Chk>0</Ir2Chk>
-            <Ra1Chk>0</Ra1Chk>
+            <Ra1Chk>1</Ra1Chk>
             <Ra2Chk>0</Ra2Chk>
             <Ra3Chk>0</Ra3Chk>
-            <Im1Chk>1</Im1Chk>
+            <Im1Chk>0</Im1Chk>
             <Im2Chk>0</Im2Chk>
             <OnChipMemories>
               <Ocm1>
@@ -260,8 +257,8 @@
               </XRAM>
               <OCR_RVCT1>
                 <Type>1</Type>
-                <StartAddress>0x0</StartAddress>
-                <Size>0x0</Size>
+                <StartAddress>0x08000000</StartAddress>
+                <Size>0x10000</Size>
               </OCR_RVCT1>
               <OCR_RVCT2>
                 <Type>1</Type>
@@ -275,8 +272,8 @@
               </OCR_RVCT3>
               <OCR_RVCT4>
                 <Type>1</Type>
-                <StartAddress>0x8000000</StartAddress>
-                <Size>0x4000</Size>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -285,8 +282,8 @@
               </OCR_RVCT5>
               <OCR_RVCT6>
                 <Type>0</Type>
-                <StartAddress>0x0</StartAddress>
-                <Size>0x0</Size>
+                <StartAddress>0x20000000</StartAddress>
+                <Size>0x5000</Size>
               </OCR_RVCT6>
               <OCR_RVCT7>
                 <Type>0</Type>
@@ -300,8 +297,8 @@
               </OCR_RVCT8>
               <OCR_RVCT9>
                 <Type>0</Type>
-                <StartAddress>0x20000000</StartAddress>
-                <Size>0x1000</Size>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
@@ -309,7 +306,7 @@
                 <Size>0x0</Size>
               </OCR_RVCT10>
             </OnChipMemories>
-            <RvctStartVector></RvctStartVector>
+            <RvctStartVector/>
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
@@ -322,10 +319,10 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>2</wLevel>
+            <wLevel>0</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
+            <uC99>1</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>3</v6Lang>
@@ -336,10 +333,10 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls></MiscControls>
-              <Define>STM32F030x6 __STM32F0xx_HAL_H USE_FULL_LL_DRIVER</Define>
-              <Undefine></Undefine>
-              <IncludePath>.\;.\Core\Drivers\CMSIS\Core\Include;.\Core\Drivers\CMSIS\Device\ST\STM32F0xx\Include;.\Core\Drivers\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm;.\Core\Drivers\STM32F0xx_HAL_Driver\Inc;.\Core\Drivers\STM32F0xx_HAL_Driver\Src;.\Support Libraries;.\STM32_Libs\F0\Help Functions;.\STM32_Libs\F0\Hardware Controllers;.\Hardware Libraries</IncludePath>
+              <MiscControls/>
+              <Define>STM32F030x6,USE_FULL_LL_DRIVER</Define>
+              <Undefine/>
+              <IncludePath>.;Core\Drivers\CMSIS\Core\Include;Core\Drivers\CMSIS\Device\ST\STM32F0xx\Include;Core\Drivers\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm;Core\Drivers\STM32F0xx_HAL_Driver\Inc;Core\Drivers\STM32F0xx_HAL_Driver\Src;Support Libraries;STM32_Libs\F0\Help Functions;STM32_Libs\F0\Hardware Controllers;.eide\deps;Hardware Libraries</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -354,10 +351,10 @@
             <useXO>0</useXO>
             <ClangAsOpt>1</ClangAsOpt>
             <VariousControls>
-              <MiscControls></MiscControls>
-              <Define></Define>
-              <Undefine></Undefine>
-              <IncludePath></IncludePath>
+              <MiscControls/>
+              <Define>STM32F030x6,USE_FULL_LL_DRIVER</Define>
+              <Undefine/>
+              <IncludePath/>
             </VariousControls>
           </Aads>
           <LDads>
@@ -369,64 +366,44 @@
             <useFile>0</useFile>
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
-            <pXoBase></pXoBase>
-            <ScatterFile></ScatterFile>
-            <IncludeLibs></IncludeLibs>
-            <IncludeLibsPath></IncludeLibsPath>
-            <Misc></Misc>
-            <LinkerInputFile></LinkerInputFile>
-            <DisabledWarnings></DisabledWarnings>
+            <pXoBase/>
+            <ScatterFile>&lt;YOUR_SCATTER_FILE&gt;.sct</ScatterFile>
+            <IncludeLibs/>
+            <IncludeLibsPath/>
+            <Misc/>
+            <LinkerInputFile/>
+            <DisabledWarnings/>
           </LDads>
         </TargetArmAds>
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>Source Group 1</GroupName>
-          <Files>
-            <File>
-              <FileName>Source.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\Source.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>defines.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\defines.h</FilePath>
-            </File>
-            <File>
-              <FileName>Source.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>System</GroupName>
           <Files>
             <File>
-              <FileName>system_stm32f0xx.h</FileName>
+              <FileName>stm32f030x6.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Core\Drivers\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h</FilePath>
+              <FilePath>Core/Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f030x6.h</FilePath>
             </File>
             <File>
               <FileName>stm32f0xx.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Core\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h</FilePath>
+              <FilePath>Core/Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h</FilePath>
             </File>
             <File>
-              <FileName>stm32f030x6.h</FileName>
+              <FileName>system_stm32f0xx.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Core\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f030x6.h</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f0xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Core\Drivers\CMSIS\Device\ST\STM32F0xx\Source\Templates\system_stm32f0xx.c</FilePath>
+              <FilePath>Core/Drivers/CMSIS/Device/ST/STM32F0xx/Include/system_stm32f0xx.h</FilePath>
             </File>
             <File>
               <FileName>startup_stm32f030x6.s</FileName>
               <FileType>2</FileType>
-              <FilePath>.\Core\Drivers\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f030x6.s</FilePath>
+              <FilePath>Core/Drivers/CMSIS/Device/ST/STM32F0xx/Source/Templates/arm/startup_stm32f030x6.s</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f0xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>Core/Drivers/CMSIS/Device/ST/STM32F0xx/Source/Templates/system_stm32f0xx.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -434,136 +411,65 @@
           <GroupName>Support</GroupName>
           <Files>
             <File>
-              <FileName>peripherals.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\Support Libraries\peripherals.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>peripherals.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Support Libraries\peripherals.h</FilePath>
-            </File>
-            <File>
               <FileName>periph_functions.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\STM32_Libs\F0\Help Functions\periph_functions.cpp</FilePath>
+              <FilePath>STM32_Libs/F0/Help Functions/periph_functions.cpp</FilePath>
             </File>
             <File>
               <FileName>periph_functions.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\STM32_Libs\F0\Help Functions\periph_functions.h</FilePath>
+              <FilePath>STM32_Libs/F0/Help Functions/periph_functions.h</FilePath>
+            </File>
+            <File>
+              <FileName>peripherals.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>Support Libraries/peripherals.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>peripherals.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>Support Libraries/peripherals.h</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Hardware Controller</GroupName>
+          <GroupName>Source Group 1</GroupName>
           <Files>
+            <File>
+              <FileName>defines.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>defines.h</FilePath>
+            </File>
+            <File>
+              <FileName>Source.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>Source.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Source.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>Source.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Hardware Controllers</GroupName>
+          <Files>
+            <File>
+              <FileName>pwm_controller.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>Hardware Libraries/pwm_controller.cpp</FilePath>
+            </File>
             <File>
               <FileName>sbus_controller.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\Hardware Libraries\sbus_controller.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>sbus_controller.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware Libraries\sbus_controller.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>LL</GroupName>
-          <Files>
-            <File>
-              <FileName>stm32f0xx_ll_adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Core\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_ll_comp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Core\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_comp.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_ll_crc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Core\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_crc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_ll_crs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Core\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_crs.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_ll_dac.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Core\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_dac.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_ll_dma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Core\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_dma.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_ll_exti.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Core\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_exti.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_ll_gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Core\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_ll_i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Core\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_i2c.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_ll_pwr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Core\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_pwr.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_ll_rcc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Core\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_rcc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_ll_rtc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Core\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_rtc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_ll_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Core\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_spi.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_ll_tim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Core\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_tim.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_ll_usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Core\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_ll_usb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Core\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_usb.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f0xx_ll_utils.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Core\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_utils.c</FilePath>
+              <FilePath>Hardware Libraries/sbus_controller.cpp</FilePath>
             </File>
           </Files>
         </Group>
       </Groups>
     </Target>
   </Targets>
-
   <RTE>
     <apis/>
     <components/>
@@ -582,5 +488,4 @@
       </file>
     </files>
   </RTE>
-
 </Project>

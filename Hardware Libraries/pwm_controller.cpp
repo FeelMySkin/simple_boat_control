@@ -26,7 +26,7 @@ void PwmController::InitTIM(PwmController_InitTypeDef* init)
     tim.ClockDivision = LL_TIM_CLOCKDIVISION_DIV1;
     tim.RepetitionCounter = 0;
     tim.Prescaler = CountPrescaler(init->pwm_freq);
-    tim.Autoreload = CountPrescaler(init->pwm_freq);
+    tim.Autoreload = CountAutoreload(init->pwm_freq);
     LL_TIM_Init(init->pwm_tim,&tim);
 
     LL_TIM_OC_InitTypeDef oc;
@@ -38,7 +38,21 @@ void PwmController::InitTIM(PwmController_InitTypeDef* init)
     LL_TIM_OC_Init(init->pwm_tim,init->pwm_ch,&oc);
 }
 
-void PwmController::CountPrescaler(uint32_t freq)
+uint32_t PwmController::CountPrescaler(uint32_t freq)
 {
+    return 0;
+}
 
+uint32_t PwmController::CountAutoreload(uint32_t freq)
+{
+    return 0;
+}
+
+void PwmController::SetDuty(float percent)
+{
+    uint32_t res = percent*LL_TIM_GetAutoReload(init.pwm_tim)/100.0f;
+    if(init.pwm_ch == LL_TIM_CHANNEL_CH1) LL_TIM_OC_SetCompareCH1(init.pwm_tim,res);
+    else if(init.pwm_ch == LL_TIM_CHANNEL_CH2) LL_TIM_OC_SetCompareCH2(init.pwm_tim,res);
+    else if(init.pwm_ch == LL_TIM_CHANNEL_CH3) LL_TIM_OC_SetCompareCH3(init.pwm_tim,res);
+    else if(init.pwm_ch == LL_TIM_CHANNEL_CH4) LL_TIM_OC_SetCompareCH4(init.pwm_tim,res);
 }

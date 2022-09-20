@@ -21,6 +21,7 @@ int main()
 	InitPeriph();
     InitRCC();
     InitSBUS();
+    InitPWMs();
 
     while(1)
     {
@@ -47,7 +48,10 @@ void InitRCC()
 void InitPeriph()
 {
     LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
-    LL_APB1_GRP2_EnableClock(LL_APB1_GRP2_PERIPH_USART1);
+    LL_APB1_GRP2_EnableClock(LL_APB1_GRP2_PERIPH_USART1 | LL_APB1_GRP2_PERIPH_TIM1);
+    LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM14);
+    
+    
 }
 
 void InitSBUS()
@@ -58,4 +62,28 @@ void InitSBUS()
     sbs.rx_pin = SBUS_PIN;
     sbs.usart = SBUS_USART;
     sbus.Init(sbs);
+    
+}
+
+void InitPWMs()
+{
+    /** Motor PWM Initialize*/
+    PwmController_InitTypeDef pwm_init;
+    pwm_init.pwm_af = MOTOR_AF;
+    pwm_init.pwm_ch = MOTOR_TIM_CH;
+    pwm_init.pwm_freq = 50;
+    pwm_init.pwm_gpio = MOTOR_GPIO;
+    pwm_init.pwm_pin = MOTOR_PIN;
+    pwm_init.pwm_tim = MOTOR_TIM;
+    motor_pwm.Init(&pwm_init);
+
+    /** Servo PWM Initialize*/
+    pwm_init.pwm_af = SERVO_AF;
+    pwm_init.pwm_ch = SERVO_TIM_CH;
+    pwm_init.pwm_freq = 50;
+    pwm_init.pwm_gpio = SERVO_GPIO;
+    pwm_init.pwm_pin = SERVO_PIN;
+    pwm_init.pwm_tim = SERVO_TIM;
+    servo_pwm.Init(&pwm_init);
+
 }
