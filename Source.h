@@ -18,6 +18,8 @@
 SbusController sbus;
 PwmController motor_pwm, servo_pwm;
 
+bool armed;
+
 
 void InitRCC();
 void InitPeriph();

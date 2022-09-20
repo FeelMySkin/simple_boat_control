@@ -33,15 +33,16 @@ class SbusController
         void Init(SbusController_InitTypeDef init);
         void Parse();
         void AddByte(uint8_t byte);
-
-        uint16_t channels[16];
-        uint8_t received[25];
+        uint16_t mapped_channels[16];
 
     private:
         void InitGPIO();
         void InitUSART();
+        void Map();
 
         uint8_t recv_counter;
+        uint16_t channels[16];
+        uint8_t received[25];
         SbusController_InitTypeDef init;
 };
 

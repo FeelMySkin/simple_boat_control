@@ -77,4 +77,14 @@ void SbusController::Parse()
         channels[14] = ((received[20]>>2|received[21]<<6)                & 0x07FF);
         channels[15] = ((received[21]>>5|received[22]<<3)                & 0x07FF);
     }
+    Map();
+}
+
+void SbusController::Map()
+{
+    //min = 172, max = 1811
+    for(int i = 0;i<16;++i)
+    {
+        mapped_channels[i] = ((channels[i]-172)/(1811-172.0f))*2047;
+    }
 }

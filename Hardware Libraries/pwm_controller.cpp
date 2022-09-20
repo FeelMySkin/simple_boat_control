@@ -4,6 +4,8 @@ void PwmController::Init(PwmController_InitTypeDef* init)
 {
     this->init.pwm_tim = init->pwm_tim;
     this->init.pwm_ch = init->pwm_ch;
+    this->init.desired_resolution = 4000;
+    CountResolution(init->pwm_freq);
     InitGPIO(init);
     InitTIM(init);
 }
@@ -26,7 +28,7 @@ void PwmController::InitTIM(PwmController_InitTypeDef* init)
     tim.ClockDivision = LL_TIM_CLOCKDIVISION_DIV1;
     tim.RepetitionCounter = 0;
     tim.Prescaler = CountPrescaler(init->pwm_freq);
-    tim.Autoreload = CountAutoreload(init->pwm_freq);
+    tim.Autoreload = this->init.desired_resolution;
     LL_TIM_Init(init->pwm_tim,&tim);
 
     LL_TIM_OC_InitTypeDef oc;
@@ -40,16 +42,26 @@ void PwmController::InitTIM(PwmController_InitTypeDef* init)
 
 uint32_t PwmController::CountPrescaler(uint32_t freq)
 {
-    return 0;
+    
+    return SystemCoreClock/(init.desired_resolution*freq) - 1;
 }
 
-uint32_t PwmController::CountAutoreload(uint32_t freq)
+void PwmController::CountResolution(uint32_t freq)
 {
-    return 0;
+    while(SystemCoreClock%init.desired_resolution != 0)
+    {
+        init.desired_resolution--;
+    }
+    while((SystemCoreClock/init.desired_resolution)/freq >=0xFFFF)
+    {
+        init.desired_resolution*=2;
+    }
+    
 }
 
 void PwmController::SetDuty(float percent)
 {
+    if(percent>100) percent = 100;
     uint32_t res = percent*LL_TIM_GetAutoReload(init.pwm_tim)/100.0f;
     if(init.pwm_ch == LL_TIM_CHANNEL_CH1) LL_TIM_OC_SetCompareCH1(init.pwm_tim,res);
     else if(init.pwm_ch == LL_TIM_CHANNEL_CH2) LL_TIM_OC_SetCompareCH2(init.pwm_tim,res);

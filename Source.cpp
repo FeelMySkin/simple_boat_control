@@ -16,6 +16,10 @@ extern "C"
     }
 }
 
+#define SERVO_CH    2
+#define MOTOR_CH    3
+#define ARM_CH      5
+
 int main()
 {
 	InitPeriph();
@@ -23,9 +27,26 @@ int main()
     InitSBUS();
     InitPWMs();
 
+    armed = false;
+
     while(1)
     {
-        __WFI();
+        
+        servo_pwm.SetDuty((sbus.mapped_channels[SERVO_CH]/2048.0f)*100.0f);
+        if(sbus.mapped_channels[ARM_CH]<=500)
+        {
+            motor_pwm.SetDuty(0);
+            armed = false;
+        }
+        else if(!armed)
+        {
+            motor_pwm.SetDuty(0);
+            if(sbus.mapped_channels[MOTOR_CH]<=10) armed = true;
+        }
+        else if(armed)
+        {
+            motor_pwm.SetDuty((sbus.mapped_channels[MOTOR_CH]/2048.0f)*100.0f);
+        }
     }
 }
 
@@ -71,7 +92,7 @@ void InitPWMs()
     PwmController_InitTypeDef pwm_init;
     pwm_init.pwm_af = MOTOR_AF;
     pwm_init.pwm_ch = MOTOR_TIM_CH;
-    pwm_init.pwm_freq = 50;
+    pwm_init.pwm_freq = 400;
     pwm_init.pwm_gpio = MOTOR_GPIO;
     pwm_init.pwm_pin = MOTOR_PIN;
     pwm_init.pwm_tim = MOTOR_TIM;
@@ -85,5 +106,5 @@ void InitPWMs()
     pwm_init.pwm_pin = SERVO_PIN;
     pwm_init.pwm_tim = SERVO_TIM;
     servo_pwm.Init(&pwm_init);
-
+    servo_pwm.SetDuty(50);
 }

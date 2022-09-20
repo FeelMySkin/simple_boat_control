@@ -13,21 +13,15 @@
 
 #include "defines.h"
 
-struct PwmController_PrivateInit
+struct PwmController_InitTypeDef
 {
     TIM_TypeDef*    pwm_tim;
-    uint32_t        pwm_ch;
-};
-
-struct PwmController_InitTypeDef : public PwmController_PrivateInit
-{
-    //TIM_TypeDef*    pwm_tim;
     GPIO_TypeDef*   pwm_gpio;
     uint32_t        pwm_pin;
     uint32_t        pwm_af;
     uint32_t        pwm_freq;
     uint32_t        resolution;
-    //uint32_t        pwm_ch;
+    uint32_t        pwm_ch;
 };
 
 class PwmController
@@ -40,9 +34,14 @@ class PwmController
         void InitGPIO(PwmController_InitTypeDef* init);
         void InitTIM(PwmController_InitTypeDef* init);
         uint32_t CountPrescaler(uint32_t freq);
-        uint32_t CountAutoreload(uint32_t freq);
+        void CountResolution(uint32_t freq);
 
-        PwmController_PrivateInit init;
+        struct PwmController_PrivateInit
+        {
+            TIM_TypeDef*    pwm_tim;
+            uint32_t        pwm_ch;
+            uint16_t        desired_resolution;
+        }init;
 };
 
 #endif
