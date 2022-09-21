@@ -61,6 +61,7 @@ void PwmController::CountResolution(uint32_t freq)
 
 void PwmController::SetDuty(float percent)
 {
+    
     if(percent>100) percent = 100;
     uint32_t res = percent*LL_TIM_GetAutoReload(init.pwm_tim)/100.0f;
     if(init.pwm_ch == LL_TIM_CHANNEL_CH1) LL_TIM_OC_SetCompareCH1(init.pwm_tim,res);
