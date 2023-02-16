@@ -36,6 +36,8 @@ class PwmController
         uint32_t CountPrescaler(uint32_t freq);
         void CountResolution(uint32_t freq);
 
+        float curr_percent;  /** For Debug */
+
         struct PwmController_PrivateInit
         {
             TIM_TypeDef*    pwm_tim;

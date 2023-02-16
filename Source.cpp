@@ -16,9 +16,9 @@ extern "C"
     }
 }
 
-#define SERVO_CH    2
-#define MOTOR_CH    3
-#define ARM_CH      5
+#define SERVO_CH    0
+#define MOTOR_CH    2
+#define ARM_CH      4
 
 int main()
 {
@@ -29,23 +29,24 @@ int main()
 
     armed = false;
 
+	//while(1) asm("NOP");
     while(1)
     {
-        
-        servo_pwm.SetDuty((sbus.mapped_channels[SERVO_CH]/2048.0f)*100.0f);
+        servo_pwm.SetDuty(Map<float>(sbus.mapped_channels[SERVO_CH],0.f,2048.f,MIN_PERCENT,MAX_PERCENT));
+        //servo_pwm.SetDuty((sbus.mapped_channels[SERVO_CH]/2048.0f)*100.0f);
         if(sbus.mapped_channels[ARM_CH]<=500)
         {
-            motor_pwm.SetDuty(0);
+            motor_pwm.SetDuty(MIN_PERCENT);
             armed = false;
         }
         else if(!armed)
         {
-            motor_pwm.SetDuty(0);
+            motor_pwm.SetDuty(MIN_PERCENT);
             if(sbus.mapped_channels[MOTOR_CH]<=10) armed = true;
         }
         else if(armed)
         {
-            motor_pwm.SetDuty((sbus.mapped_channels[MOTOR_CH]/2048.0f)*100.0f);
+            motor_pwm.SetDuty(Map<float>(sbus.mapped_channels[MOTOR_CH],0.f,2048.f,MIN_PERCENT,MAX_PERCENT));
         }
     }
 }
@@ -97,6 +98,7 @@ void InitPWMs()
     pwm_init.pwm_pin = MOTOR_PIN;
     pwm_init.pwm_tim = MOTOR_TIM;
     motor_pwm.Init(&pwm_init);
+    motor_pwm.SetDuty(5);
 
     /** Servo PWM Initialize*/
     pwm_init.pwm_af = SERVO_AF;
@@ -106,5 +108,12 @@ void InitPWMs()
     pwm_init.pwm_pin = SERVO_PIN;
     pwm_init.pwm_tim = SERVO_TIM;
     servo_pwm.Init(&pwm_init);
-    servo_pwm.SetDuty(50);
+    servo_pwm.SetDuty(7.5f);
+}
+
+template <class T>
+T Map(T input, T min_input, T max_input, T min_output, T max_output)
+{
+    T output = ((input-min_input)/(max_input-min_input))*(max_output-min_output);
+    return output;
 }

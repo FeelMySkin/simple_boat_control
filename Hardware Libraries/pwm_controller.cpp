@@ -38,6 +38,10 @@ void PwmController::InitTIM(PwmController_InitTypeDef* init)
     oc.OCPolarity = LL_TIM_OCPOLARITY_HIGH;
     oc.OCState = LL_TIM_OCSTATE_ENABLE;
     LL_TIM_OC_Init(init->pwm_tim,init->pwm_ch,&oc);
+	
+	LL_TIM_EnableCounter(init->pwm_tim);
+	LL_TIM_CC_EnableChannel(init->pwm_tim,init->pwm_ch);
+	LL_TIM_EnableAllOutputs(init->pwm_tim);
 }
 
 uint32_t PwmController::CountPrescaler(uint32_t freq)
@@ -61,8 +65,8 @@ void PwmController::CountResolution(uint32_t freq)
 
 void PwmController::SetDuty(float percent)
 {
-    
     if(percent>100) percent = 100;
+    curr_percent = percent;
     uint32_t res = percent*LL_TIM_GetAutoReload(init.pwm_tim)/100.0f;
     if(init.pwm_ch == LL_TIM_CHANNEL_CH1) LL_TIM_OC_SetCompareCH1(init.pwm_tim,res);
     else if(init.pwm_ch == LL_TIM_CHANNEL_CH2) LL_TIM_OC_SetCompareCH2(init.pwm_tim,res);

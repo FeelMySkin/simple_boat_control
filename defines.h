@@ -13,4 +13,10 @@
 
 #include "peripherals.h"
 
+#define MIN_PERCENT     5
+#define MAX_PERCENT     10
+
+template <class T>
+T Map(T input, T min_input, T max_input, T min_output, T max_output);
+
 #endif
