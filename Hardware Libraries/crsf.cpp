@@ -19,10 +19,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include "crsf.h"
 
-#include "platform.h"
-FILE_COMPILE_FOR_SPEED
-#ifdef USE_SERIALRX_CRSF
+/*#include "platform.h"
 
 #include "build/build_config.h"
 #include "build/debug.h"
@@ -41,7 +40,7 @@ FILE_COMPILE_FOR_SPEED
 #include "rx/rx.h"
 #include "rx/crsf.h"
 
-#include "telemetry/crsf.h"
+#include "telemetry/crsf.h"*/
 #define CRSF_TIME_NEEDED_PER_FRAME_US   1100 // 700 ms + 400 ms for potential ad-hoc request
 #define CRSF_TIME_BETWEEN_FRAMES_US     6667 // At fastest, frames are sent by the transmitter every 6.667 milliseconds, 150 Hz
 
@@ -50,10 +49,10 @@ FILE_COMPILE_FOR_SPEED
 #define CRSF_PAYLOAD_OFFSET offsetof(crsfFrameDef_t, type)
 #define CRSF_POWER_COUNT 9
 
-STATIC_UNIT_TESTED bool crsfFrameDone = false;
-STATIC_UNIT_TESTED crsfFrame_t crsfFrame;
+bool crsfFrameDone = false;
+crsfFrame_t crsfFrame;
 
-STATIC_UNIT_TESTED uint32_t crsfChannelData[CRSF_MAX_CHANNEL];
+uint32_t crsfChannelData[CRSF_MAX_CHANNEL];
 
 static serialPort_t *serialPort;
 static timeUs_t crsfFrameStartAt = 0;
@@ -126,8 +125,9 @@ typedef struct crsfPayloadLinkStatistics_s {
 
 typedef struct crsfPayloadLinkStatistics_s crsfPayloadLinkStatistics_t;
 
-STATIC_UNIT_TESTED uint8_t crsfFrameCRC(void)
+uint8_t CRSF_Controller::crsfFrameCRC(void)
 {
+	//TODO: Calculate CRC (what is DVB?)
     // CRC includes type and payload
     uint8_t crc = crc8_dvb_s2(0, crsfFrame.frame.type);
     for (int ii = 0; ii < crsfFrame.frame.frameLength - CRSF_FRAME_LENGTH_TYPE_CRC; ++ii) {
@@ -137,12 +137,12 @@ STATIC_UNIT_TESTED uint8_t crsfFrameCRC(void)
 }
 
 // Receive ISR callback, called back from serial port
-STATIC_UNIT_TESTED void crsfDataReceive(uint16_t c, void *rxCallbackData)
+void CRSF_Controller::crsfDataReceive(uint16_t c, void *rxCallbackData)
 {
-    UNUSED(rxCallbackData);
-
+    
+	//TODO: understand what is happening...
     static uint8_t crsfFramePosition = 0;
-    const timeUs_t now = micros();
+    const uint32_t now = SysTick->VAL;
 
 #ifdef DEBUG_CRSF_PACKETS
     debug[2] = now - crsfFrameStartAt;
@@ -190,10 +190,10 @@ STATIC_UNIT_TESTED void crsfDataReceive(uint16_t c, void *rxCallbackData)
     }
 }
 
-STATIC_UNIT_TESTED uint8_t crsfFrameStatus(rxRuntimeConfig_t *rxRuntimeConfig)
+uint8_t CRSF_Controller::crsfFrameStatus()
 {
-    UNUSED(rxRuntimeConfig);
 
+	//TODO: Rewrite Everything here.
     if (crsfFrameDone) {
         crsfFrameDone = false;
         if (crsfFrame.frame.type == CRSF_FRAMETYPE_RC_CHANNELS_PACKED) {
@@ -261,9 +261,9 @@ STATIC_UNIT_TESTED uint8_t crsfFrameStatus(rxRuntimeConfig_t *rxRuntimeConfig)
     return RX_FRAME_PENDING;
 }
 
-STATIC_UNIT_TESTED uint16_t crsfReadRawRC(const rxRuntimeConfig_t *rxRuntimeConfig, uint8_t chan)
+uint16_t CRSF_Controller::crsfReadRawRC(uint8_t chan)
 {
-    UNUSED(rxRuntimeConfig);
+    
     /* conversion from RC value to PWM
      *       RC     PWM
      * min  172 ->  988us
@@ -275,15 +275,17 @@ STATIC_UNIT_TESTED uint16_t crsfReadRawRC(const rxRuntimeConfig_t *rxRuntimeConf
     return (crsfChannelData[chan] * 1024 / 1639) + 881;
 }
 
-void crsfRxWriteTelemetryData(const void *data, int len)
+void CRSF_Controller::crsfRxWriteTelemetryData(const void *data, int len)
 {
+	//TODO: rewrite LEN (or MIN)
     len = MIN(len, (int)sizeof(telemetryBuf));
     memcpy(telemetryBuf, data, len);
     telemetryBufLen = len;
 }
 
-void crsfRxSendTelemetryData(void)
+void CRSF_Controller::crsfRxSendTelemetryData(void)
 {
+	//TODO: Rewrite to LL and my libraries...
     // if there is telemetry data to write
     if (telemetryBufLen > 0) {
         // check that we are not in bi dir mode or that we are not currently receiving data (ie in the middle of an RX frame)
@@ -300,35 +302,24 @@ void crsfRxSendTelemetryData(void)
     }
 }
 
-bool crsfRxInit(const rxConfig_t *rxConfig, rxRuntimeConfig_t *rxRuntimeConfig)
+void CRSF_Controller::InitUART()
 {
     for (int ii = 0; ii < CRSF_MAX_CHANNEL; ++ii) {
-        crsfChannelData[ii] = (16 * PWM_RANGE_MIDDLE) / 10 - 1408;
+        crsfChannelData[ii] = (16 * 1500) / 10 - 1408;
     }
 
-    rxRuntimeConfig->channelCount = CRSF_MAX_CHANNEL;
-    rxRuntimeConfig->rcReadRawFn = crsfReadRawRC;
-    rxRuntimeConfig->rcFrameStatusFn = crsfFrameStatus;
+    //rxRuntimeConfig->channelCount = CRSF_MAX_CHANNEL;
+    //rxRuntimeConfig->rcReadRawFn = crsfReadRawRC;
+    //rxRuntimeConfig->rcFrameStatusFn = crsfFrameStatus;
 
-    const serialPortConfig_t *portConfig = findSerialPortConfig(FUNCTION_RX_SERIAL);
-    if (!portConfig) {
-        return false;
-    }
-
-    serialPort = openSerialPort(portConfig->identifier,
-        FUNCTION_RX_SERIAL,
-        crsfDataReceive,
-        NULL,
-        CRSF_BAUDRATE,
-        CRSF_PORT_MODE,
-        CRSF_PORT_OPTIONS | (tristateWithDefaultOffIsActive(rxConfig->halfDuplex) ? SERIAL_BIDIR : 0)
-        );
-
-    return serialPort != NULL;
+	LL_USART_InitTypeDef usrt;
+	usrt.BaudRate = CRSF_BAUDRATE;
+	usrt.DataWidth = LL_USART_DATAWIDTH_8B;
+	usrt.HardwareFlowControl = LL_USART_HWCONTROL_NONE;
+	usrt.OverSampling = LL_USART_OVERSAMPLING_16;
+	usrt.Parity = LL_USART_PARITY_NONE;
+	usrt.TransferDirection = LL_USART_DIRECTION_TX_RX;
+	LL_USART_Init(crsf.uart,&usrt);
+	LL_USART_EnableHalfDuplex(crsf.uart);
+	LL_USART_Enable(crsf.uart);
 }
-
-bool crsfRxIsActive(void)
-{
-    return serialPort != NULL;
-}
-#endif

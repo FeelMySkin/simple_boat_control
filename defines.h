@@ -12,6 +12,7 @@
 #define DEFINES_H
 
 #include "peripherals.h"
+#include "stdint.h"
 
 #define MIN_PERCENT     5
 #define MAX_PERCENT     10

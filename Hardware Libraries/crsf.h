@@ -15,7 +15,11 @@
  * along with Cleanflight.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#ifndef CRSF_H
+#define CRSF_H
+
+#include "defines.h"
+#include "stdint.h"
 
 #define CRSF_BAUDRATE           420000
 #define CRSF_PORT_OPTIONS       (SERIAL_STOPBITS_1 | SERIAL_PARITY_NO)
@@ -66,6 +70,15 @@ enum {
 // Clashes with CRSF_ADDRESS_FLIGHT_CONTROLLER
 #define CRSF_TELEMETRY_SYNC_BYTE  0XC8
 
+struct rxLinkStatistics_s {
+    int16_t uplinkRSSI;     // RSSI value in dBm
+    uint8_t uplinkLQ;       // A protocol specific measure of the link quality in [0..100]
+    int8_t uplinkSNR;       // The SNR of the uplink in dB
+    uint8_t rfMode;         // A protocol specific measure of the transmission bandwidth [2 = 150Hz, 1 = 50Hz, 0 = 4Hz]
+    uint16_t uplinkTXPower; // power in mW
+    uint8_t activeAntenna;
+};
+
 typedef enum {
     CRSF_ADDRESS_BROADCAST = 0x00,
     CRSF_ADDRESS_USB = 0x10,
@@ -111,16 +124,49 @@ typedef struct crsfFrameDef_s {
     uint8_t payload[CRSF_PAYLOAD_SIZE_MAX + 1]; // +1 for CRC at end of payload
 } crsfFrameDef_t;
 
+enum rxFrameState_e{
+    RX_FRAME_PENDING             = 0,         // No new data available from receiver
+    RX_FRAME_COMPLETE            = (1 << 0),  // There is new data available
+    RX_FRAME_FAILSAFE            = (1 << 1),  // Receiver detected loss of RC link. Only valid when RX_FRAME_COMPLETE is set as well
+    RX_FRAME_PROCESSING_REQUIRED = (1 << 2),
+    RX_FRAME_DROPPED             = (1 << 3),  // Receiver detected dropped frame. Not loss of link yet.
+};
+
 typedef union crsfFrame_u {
     uint8_t bytes[CRSF_FRAME_SIZE_MAX];
     crsfFrameDef_t frame;
 } crsfFrame_t;
 
+struct CRSF_TypeDef
+{
+	GPIO_TypeDef* 	rx_tx_gpio;
+	uint32_t		rx_tx_pin;
+	USART_TypeDef*	uart;
+	uint32_t		rx_tx_af;
+};
 
-void crsfRxWriteTelemetryData(const void *data, int len);
-void crsfRxSendTelemetryData(void);
+class CRSF_Controller
+{
+	public:
+		void Init(CRSF_TypeDef ini);
+		void crsfRxWriteTelemetryData(const void *data, int len);
+		void crsfRxSendTelemetryData(void);
+
+	private:
+		void InitGPIO();
+		void InitUART();
+		uint8_t crsfFrameCRC(void);
+		void crsfDataReceive(uint16_t c, void *rxCallbackData);
+		uint8_t crsfFrameStatus();
+		uint16_t crsfReadRawRC(uint8_t chan);
+		rxLinkStatistics_s rxLinkStatistics;
+		CRSF_TypeDef crsf;
+};
+
+
+
 
 struct rxConfig_s;
 struct rxRuntimeConfig_s;
-bool crsfRxInit(const struct rxConfig_s *initialRxConfig, struct rxRuntimeConfig_s *rxRuntimeConfig);
-bool crsfRxIsActive(void);
+
+#endif

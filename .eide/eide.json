@@ -13,6 +13,9 @@
         "name": "Hardware Controllers",
         "files": [
           {
+            "path": "Hardware Libraries/crsf.cpp"
+          },
+          {
             "path": "Hardware Libraries/pwm_controller.cpp"
           },
           {
