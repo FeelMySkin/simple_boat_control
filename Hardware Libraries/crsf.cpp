@@ -54,8 +54,8 @@ crsfFrame_t crsfFrame;
 
 uint32_t crsfChannelData[CRSF_MAX_CHANNEL];
 
-static serialPort_t *serialPort;
-static timeUs_t crsfFrameStartAt = 0;
+//static serialPort_t *serialPort;
+static uint32_t crsfFrameStartAt = 0;
 static uint8_t telemetryBuf[CRSF_FRAME_SIZE_MAX];
 static uint8_t telemetryBufLen = 0;
 
@@ -127,12 +127,13 @@ typedef struct crsfPayloadLinkStatistics_s crsfPayloadLinkStatistics_t;
 
 uint8_t CRSF_Controller::crsfFrameCRC(void)
 {
+    uint8_t crc = 0;
 	//TODO: Calculate CRC (what is DVB?)
     // CRC includes type and payload
-    uint8_t crc = crc8_dvb_s2(0, crsfFrame.frame.type);
+    /*uint8_t crc = crc8_dvb_s2(0, crsfFrame.frame.type);
     for (int ii = 0; ii < crsfFrame.frame.frameLength - CRSF_FRAME_LENGTH_TYPE_CRC; ++ii) {
         crc = crc8_dvb_s2(crc, crsfFrame.frame.payload[ii]);
-    }
+    }*/
     return crc;
 }
 
@@ -278,7 +279,8 @@ uint16_t CRSF_Controller::crsfReadRawRC(uint8_t chan)
 void CRSF_Controller::crsfRxWriteTelemetryData(const void *data, int len)
 {
 	//TODO: rewrite LEN (or MIN)
-    len = MIN(len, (int)sizeof(telemetryBuf));
+    
+    len = len<(int)sizeof(telemetryBuf)?len:(int)sizeof(telemetryBuf);// min(len, (int)sizeof(telemetryBuf));
     memcpy(telemetryBuf, data, len);
     telemetryBufLen = len;
 }

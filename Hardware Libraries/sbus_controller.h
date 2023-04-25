@@ -13,6 +13,7 @@
 
 #include "defines.h"
 //172~1811
+#define MAX_FRAME_SIZE	64
 
 /**
  * @brief Sbus Controller Initializer
@@ -42,7 +43,7 @@ class SbusController
 
         uint8_t recv_counter;
         uint16_t channels[16];
-        uint8_t received[25];
+        uint8_t received[MAX_FRAME_SIZE];
         SbusController_InitTypeDef init;
 };
 

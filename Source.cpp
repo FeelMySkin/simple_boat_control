@@ -4,6 +4,7 @@ extern "C"
 {
     void USART1_IRQHandler()
     {
+		if(LL_USART_IsActiveFlag_ORE(SBUS_USART)) LL_USART_ClearFlag_ORE(SBUS_USART);
         if(LL_USART_IsActiveFlag_RXNE(SBUS_USART))
         {
             sbus.AddByte(LL_USART_ReceiveData8(SBUS_USART));
