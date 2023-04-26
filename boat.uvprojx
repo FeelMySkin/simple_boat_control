@@ -609,6 +609,11 @@
               <FileType>8</FileType>
               <FilePath>Hardware Libraries/sbus_controller.cpp</FilePath>
             </File>
+            <File>
+              <FileName>crsf.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\Hardware Libraries\crsf.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

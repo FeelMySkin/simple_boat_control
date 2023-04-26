@@ -63,10 +63,10 @@ void CRSF_Controller::Init(CRSF_TypeDef init)
 void CRSF_Controller::InitTIM()
 {
 	LL_TIM_InitTypeDef tim;
-	tim.Autoreload = 500;
+	tim.Autoreload = 1000;
 	tim.ClockDivision = LL_TIM_CLOCKDIVISION_DIV1;
 	tim.CounterMode = LL_TIM_COUNTERMODE_UP;
-	tim.Prescaler = SystemCoreClock/1000000;
+	tim.Prescaler = SystemCoreClock/1000000 -1;
 	tim.RepetitionCounter = 0;
 	LL_TIM_Init(init.control_tim,&tim);
 
@@ -103,8 +103,8 @@ void CRSF_Controller::InitUSART()
     //LL_USART_SetBinaryDataLogic(init.usart,LL_USART_BINARY_LOGIC_NEGATIVE);
     LL_USART_SetRXPinLevel(init.usart,LL_USART_RXPIN_LEVEL_STANDARD);
 
-    LL_USART_EnableIT_IDLE(init.usart);
-    //LL_USART_EnableIT_RXNE(init.usart);
+    //LL_USART_EnableIT_IDLE(init.usart);
+    LL_USART_EnableIT_RXNE(init.usart);
 
     EnableUsartIrqn(init.usart,0);
     LL_USART_Enable(init.usart);
@@ -127,26 +127,36 @@ void CRSF_Controller::Parse()
         return;
     }*/
     
-    if(received[recv_counter-1] == 0xC8 && received[0] == CRSF_ADDRESS_FLIGHT_CONTROLLER)
+    if(/*received[recv_counter-1] == 0xC8 &&*/ received[0] == CRSF_ADDRESS_FLIGHT_CONTROLLER && received[1] == recv_counter-2)
     {
-		if(received[1] == recv_counter-2 && received[2] == CRSF_FRAMETYPE_RC_CHANNELS_PACKED)
-			for(int i = 0;i<CRSF_FRAME_RC_CHANNELS_PAYLOAD_SIZE;++i) true_ch.rcv[i] = received[3+i];
-        /*channels[0]  = ((received[3]|received[4]<<8)                    & 0x07FF);
-        channels[1]  = ((received[4]>>3 |received[5]<<5)                 & 0x07FF);
-        channels[2]  = ((received[5]>>6 |received[6]<<2 |received[7]<<10)  & 0x07FF);
-        channels[3]  = ((received[7]>>1 |received[8]<<7)                 & 0x07FF);
-        channels[4]  = ((received[8]>>4 |received[9]<<4)                 & 0x07FF);
-        channels[5]  = ((received[9]>>7 |received[10]<<1 |received[11]<<9)   & 0x07FF);
-        channels[6]  = ((received[11]>>2 |received[12]<<6)                & 0x07FF);
-        channels[7]  = ((received[12]>>5|received[13]<<3)                & 0x07FF);
-        channels[8]  = ((received[14]   |received[15]<<8)                & 0x07FF);
-        channels[9]  = ((received[15]>>3|received[16]<<5)                & 0x07FF);
-        channels[10] = ((received[16]>>6|received[17]<<2|received[18]<<10) & 0x07FF);
-        channels[11] = ((received[18]>>1|received[19]<<7)                & 0x07FF);
-        channels[12] = ((received[19]>>4|received[20]<<4)                & 0x07FF);
-        channels[13] = ((received[20]>>7|received[21]<<1|received[22]<<9)  & 0x07FF);
-        channels[14] = ((received[22]>>2|received[23]<<6)                & 0x07FF);
-        channels[15] = ((received[23]>>5|received[24]<<3)                & 0x07FF);*/
+		if(received[2] == CRSF_FRAMETYPE_RC_CHANNELS_PACKED)
+		{
+			channels[0]  = ((received[3]|received[4]<<8)                    & 0x07FF);
+			channels[1]  = ((received[4]>>3 |received[5]<<5)                 & 0x07FF);
+			channels[2]  = ((received[5]>>6 |received[6]<<2 |received[7]<<10)  & 0x07FF);
+			channels[3]  = ((received[7]>>1 |received[8]<<7)                 & 0x07FF);
+			channels[4]  = ((received[8]>>4 |received[9]<<4)                 & 0x07FF);
+			channels[5]  = ((received[9]>>7 |received[10]<<1 |received[11]<<9)   & 0x07FF);
+			channels[6]  = ((received[11]>>2 |received[12]<<6)                & 0x07FF);
+			channels[7]  = ((received[12]>>5|received[13]<<3)                & 0x07FF);
+			channels[8]  = ((received[14]   |received[15]<<8)                & 0x07FF);
+			channels[9]  = ((received[15]>>3|received[16]<<5)                & 0x07FF);
+			channels[10] = ((received[16]>>6|received[17]<<2|received[18]<<10) & 0x07FF);
+			channels[11] = ((received[18]>>1|received[19]<<7)                & 0x07FF);
+			channels[12] = ((received[19]>>4|received[20]<<4)                & 0x07FF);
+			channels[13] = ((received[20]>>7|received[21]<<1|received[22]<<9)  & 0x07FF);
+			channels[14] = ((received[22]>>2|received[23]<<6)                & 0x07FF);
+			channels[15] = ((received[23]>>5|received[24]<<3)                & 0x07FF);
+		}
+		if(received[2] == CRSF_FRAMETYPE_LINK_STATISTICS)
+		{
+			stat.uplinkRSSI = (received[4]<<8) | received[3];
+			stat.uplinkLQ = received[5];
+			stat.uplinkSNR = received[6];
+			stat.rfMode = received[7];
+			stat.uplinkTXPower = (received[9]<<8) | received[8];
+			stat.activeAntenna = received[10];
+		}
     }
 	
     recv_counter = 0;

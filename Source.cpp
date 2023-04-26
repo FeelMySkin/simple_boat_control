@@ -9,11 +9,11 @@ extern "C"
         {
             crsf.AddByte(LL_USART_ReceiveData8(CRSF_USART));
         }
-        if(LL_USART_IsActiveFlag_IDLE(CRSF_USART))
+        /*if(LL_USART_IsActiveFlag_IDLE(CRSF_USART))
         {
 			LL_USART_ClearFlag_IDLE(CRSF_USART);
             
-        }
+        }*/
     }
 
 	void TIM16_IRQHandler()
@@ -41,7 +41,7 @@ int main()
     {
         servo_pwm.SetDuty(Map<float>(crsf.mapped_channels[SERVO_CH],0.f,2048.f,MIN_PERCENT,MAX_PERCENT));
         //servo_pwm.SetDuty((sbus.mapped_channels[SERVO_CH]/2048.0f)*100.0f);
-        if(crsf.mapped_channels[ARM_CH]<=500)
+        if(crsf.mapped_channels[ARM_CH]<=500 || crsf.stat.uplinkLQ <=5)
         {
             motor_pwm.SetDuty(MIN_PERCENT);
             armed = false;
@@ -77,8 +77,9 @@ void InitRCC()
 void InitPeriph()
 {
     LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
-    LL_APB1_GRP2_EnableClock(LL_APB1_GRP2_PERIPH_USART1 | LL_APB1_GRP2_PERIPH_TIM1);
+    LL_APB1_GRP2_EnableClock(LL_APB1_GRP2_PERIPH_USART1 | LL_APB1_GRP2_PERIPH_TIM1 | LL_APB1_GRP2_PERIPH_TIM16);
     LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM14);
+    
     
     
 }
