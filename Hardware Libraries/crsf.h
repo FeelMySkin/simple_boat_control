@@ -139,28 +139,58 @@ typedef union crsfFrame_u {
 
 struct CRSF_TypeDef
 {
-	GPIO_TypeDef* 	rx_tx_gpio;
-	uint32_t		rx_tx_pin;
-	USART_TypeDef*	uart;
-	uint32_t		rx_tx_af;
+    GPIO_TypeDef*   rx_gpio;
+    uint32_t        rx_pin;
+    uint32_t        rx_af;
+    USART_TypeDef*  usart;
+	TIM_TypeDef*	control_tim;
+};
+
+struct crsf_channels_s
+{
+	unsigned ch0 : 11;
+	unsigned ch1 : 11;
+	unsigned ch2 : 11;
+	unsigned ch3 : 11;
+	unsigned ch4 : 11;
+	unsigned ch5 : 11;
+	unsigned ch6 : 11;
+	unsigned ch7 : 11;
+	unsigned ch8 : 11;
+	unsigned ch9 : 11;
+	unsigned ch10 : 11;
+	unsigned ch11 : 11;
+	unsigned ch12 : 11;
+	unsigned ch13 : 11;
+	unsigned ch14 : 11;
+	unsigned ch15 : 11;
+};
+
+union chals
+{
+	uint8_t rcv[22];
+	crsf_channels_s channels;
 };
 
 class CRSF_Controller
 {
 	public:
-		void Init(CRSF_TypeDef ini);
-		void crsfRxWriteTelemetryData(const void *data, int len);
-		void crsfRxSendTelemetryData(void);
+        void Init(CRSF_TypeDef init);
+        void Parse();
+        void AddByte(uint8_t byte);
+        uint16_t mapped_channels[16];
 
-	private:
-		void InitGPIO();
-		void InitUART();
-		uint8_t crsfFrameCRC(void);
-		void crsfDataReceive(uint16_t c, void *rxCallbackData);
-		uint8_t crsfFrameStatus();
-		uint16_t crsfReadRawRC(uint8_t chan);
-		rxLinkStatistics_s rxLinkStatistics;
-		CRSF_TypeDef crsf;
+    private:
+        void InitGPIO();
+        void InitUSART();
+		void InitTIM();
+        void Map();
+
+        uint8_t recv_counter;
+        uint16_t channels[16];
+        uint8_t received[CRSF_FRAME_SIZE_MAX];
+        CRSF_TypeDef init;
+		chals true_ch;
 };
 
 

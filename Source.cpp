@@ -4,17 +4,23 @@ extern "C"
 {
     void USART1_IRQHandler()
     {
-		if(LL_USART_IsActiveFlag_ORE(SBUS_USART)) LL_USART_ClearFlag_ORE(SBUS_USART);
-        if(LL_USART_IsActiveFlag_RXNE(SBUS_USART))
+		if(LL_USART_IsActiveFlag_ORE(CRSF_USART)) LL_USART_ClearFlag_ORE(CRSF_USART);
+        if(LL_USART_IsActiveFlag_RXNE(CRSF_USART))
         {
-            sbus.AddByte(LL_USART_ReceiveData8(SBUS_USART));
+            crsf.AddByte(LL_USART_ReceiveData8(CRSF_USART));
         }
-        if(LL_USART_IsActiveFlag_IDLE(SBUS_USART))
+        if(LL_USART_IsActiveFlag_IDLE(CRSF_USART))
         {
-			LL_USART_ClearFlag_IDLE(SBUS_USART);
-            sbus.Parse();
+			LL_USART_ClearFlag_IDLE(CRSF_USART);
+            
         }
     }
+
+	void TIM16_IRQHandler()
+	{
+		LL_TIM_ClearFlag_UPDATE(CRSF_TIM);
+		crsf.Parse();
+	}
 }
 
 #define SERVO_CH    0
@@ -25,7 +31,7 @@ int main()
 {
 	InitPeriph();
     InitRCC();
-    InitSBUS();
+    InitCRSF();
     InitPWMs();
 
     armed = false;
@@ -33,9 +39,9 @@ int main()
 	//while(1) asm("NOP");
     while(1)
     {
-        servo_pwm.SetDuty(Map<float>(sbus.mapped_channels[SERVO_CH],0.f,2048.f,MIN_PERCENT,MAX_PERCENT));
+        servo_pwm.SetDuty(Map<float>(crsf.mapped_channels[SERVO_CH],0.f,2048.f,MIN_PERCENT,MAX_PERCENT));
         //servo_pwm.SetDuty((sbus.mapped_channels[SERVO_CH]/2048.0f)*100.0f);
-        if(sbus.mapped_channels[ARM_CH]<=500)
+        if(crsf.mapped_channels[ARM_CH]<=500)
         {
             motor_pwm.SetDuty(MIN_PERCENT);
             armed = false;
@@ -43,11 +49,11 @@ int main()
         else if(!armed)
         {
             motor_pwm.SetDuty(MIN_PERCENT);
-            if(sbus.mapped_channels[MOTOR_CH]<=10) armed = true;
+            if(crsf.mapped_channels[MOTOR_CH]<=10) armed = true;
         }
         else if(armed)
         {
-            motor_pwm.SetDuty(Map<float>(sbus.mapped_channels[MOTOR_CH],0.f,2048.f,MIN_PERCENT,MAX_PERCENT));
+            motor_pwm.SetDuty(Map<float>(crsf.mapped_channels[MOTOR_CH],0.f,2048.f,MIN_PERCENT,MAX_PERCENT));
         }
     }
 }
@@ -77,14 +83,15 @@ void InitPeriph()
     
 }
 
-void InitSBUS()
+void InitCRSF()
 {
-    SbusController_InitTypeDef sbs;
-    sbs.rx_af = SBUS_AF;
-    sbs.rx_gpio = SBUS_GPIO;
-    sbs.rx_pin = SBUS_PIN;
-    sbs.usart = SBUS_USART;
-    sbus.Init(sbs);
+    CRSF_TypeDef sbs;
+    sbs.rx_af = CRSF_AF;
+    sbs.rx_gpio = CRSF_GPIO;
+    sbs.rx_pin = CRSF_PIN;
+    sbs.usart = CRSF_USART;
+	sbs.control_tim = CRSF_TIM;
+    crsf.Init(sbs);
     
 }
 

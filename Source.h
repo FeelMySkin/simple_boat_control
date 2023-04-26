@@ -12,10 +12,10 @@
 #define SOURCE_H
 
 #include "defines.h"
-#include "sbus_controller.h"
+#include "crsf.h"
 #include "pwm_controller.h"
 
-SbusController sbus;
+CRSF_Controller crsf;
 PwmController motor_pwm, servo_pwm;
 
 bool armed;
@@ -23,7 +23,7 @@ bool armed;
 
 void InitRCC();
 void InitPeriph();
-void InitSBUS();
+void InitCRSF();
 void InitPWMs();
 
 #endif

@@ -23,16 +23,16 @@
 #define SERVO_GPIO      GPIOA
 #define SERVO_PIN       LL_GPIO_PIN_4
 #define SERVO_AF        LL_GPIO_AF_4
-#define SBUS_GPIO       GPIOA
-#define SBUS_PIN        LL_GPIO_PIN_3
-#define SBUS_AF         LL_GPIO_AF_1
+#define CRSF_GPIO       GPIOA
+#define CRSF_PIN        LL_GPIO_PIN_3
+#define CRSF_AF         LL_GPIO_AF_1
 
 /**
  * @defgroup USART
  * 
  */
-#define SBUS_USART      USART1
-#define SBUS_BAUD       100000
+#define CRSF_USART      USART1
+#define CRSF_BAUD       420000
 
 /**
  * @defgroup TIMs
@@ -42,5 +42,7 @@
 #define MOTOR_TIM_CH    LL_TIM_CHANNEL_CH1
 #define SERVO_TIM       TIM14
 #define SERVO_TIM_CH    LL_TIM_CHANNEL_CH1
+
+#define CRSF_TIM		TIM16
 
 #endif

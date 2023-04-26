@@ -8,32 +8,6 @@ void SbusController::Init(SbusController_InitTypeDef init)
     recv_counter = 0;
 }
 
-struct crsf_channels_s
-{
-	unsigned ch0 : 11;
-	unsigned ch1 : 11;
-	unsigned ch2 : 11;
-	unsigned ch3 : 11;
-	unsigned ch4 : 11;
-	unsigned ch5 : 11;
-	unsigned ch6 : 11;
-	unsigned ch7 : 11;
-	unsigned ch8 : 11;
-	unsigned ch9 : 11;
-	unsigned ch10 : 11;
-	unsigned ch11 : 11;
-	unsigned ch12 : 11;
-	unsigned ch13 : 11;
-	unsigned ch14 : 11;
-	unsigned ch15 : 11;
-};
-
-union chals
-{
-	uint8_t rcv[22];
-	crsf_channels_s channels;
-}true_ch;
-
 void SbusController::InitGPIO()
 {
     LL_GPIO_InitTypeDef gpio;
@@ -49,7 +23,7 @@ void SbusController::InitGPIO()
 void SbusController::InitUSART()
 {
     LL_USART_InitTypeDef usrt;
-    usrt.BaudRate = 420000;
+    usrt.BaudRate = 100000;
     usrt.DataWidth = LL_USART_DATAWIDTH_8B;
     usrt.HardwareFlowControl = LL_USART_HWCONTROL_NONE;
     usrt.OverSampling = LL_USART_OVERSAMPLING_16;
@@ -59,7 +33,7 @@ void SbusController::InitUSART()
     LL_USART_Init(init.usart,&usrt);
 	
     //LL_USART_SetBinaryDataLogic(init.usart,LL_USART_BINARY_LOGIC_NEGATIVE);
-    LL_USART_SetRXPinLevel(init.usart,LL_USART_RXPIN_LEVEL_STANDARD);
+    LL_USART_SetRXPinLevel(init.usart,LL_USART_RXPIN_LEVEL_INVERTED);
 
     LL_USART_EnableIT_IDLE(init.usart);
     LL_USART_EnableIT_RXNE(init.usart);
@@ -83,25 +57,24 @@ void SbusController::Parse()
         return;
     }*/
     
-    if(received[recv_counter-1] == 0xC8)
+    if(received[0] == 0x0F)
     {
-		for(int i = 0;i<22;++i) true_ch.rcv[i] = received[3+i];
-        channels[0]  = ((received[3]|received[4]<<8)                    & 0x07FF);
-        channels[1]  = ((received[4]>>3 |received[5]<<5)                 & 0x07FF);
-        channels[2]  = ((received[5]>>6 |received[6]<<2 |received[7]<<10)  & 0x07FF);
-        channels[3]  = ((received[7]>>1 |received[8]<<7)                 & 0x07FF);
-        channels[4]  = ((received[8]>>4 |received[9]<<4)                 & 0x07FF);
-        channels[5]  = ((received[9]>>7 |received[10]<<1 |received[11]<<9)   & 0x07FF);
-        channels[6]  = ((received[11]>>2 |received[12]<<6)                & 0x07FF);
-        channels[7]  = ((received[12]>>5|received[13]<<3)                & 0x07FF);
-        channels[8]  = ((received[14]   |received[15]<<8)                & 0x07FF);
-        channels[9]  = ((received[15]>>3|received[16]<<5)                & 0x07FF);
-        channels[10] = ((received[16]>>6|received[17]<<2|received[18]<<10) & 0x07FF);
-        channels[11] = ((received[18]>>1|received[19]<<7)                & 0x07FF);
-        channels[12] = ((received[19]>>4|received[20]<<4)                & 0x07FF);
-        channels[13] = ((received[20]>>7|received[21]<<1|received[22]<<9)  & 0x07FF);
-        channels[14] = ((received[22]>>2|received[23]<<6)                & 0x07FF);
-        channels[15] = ((received[23]>>5|received[24]<<3)                & 0x07FF);
+        channels[0]  = ((received[1]|received[2]<<8)                    & 0x07FF);
+        channels[1]  = ((received[2]>>3 |received[1]<<5)                 & 0x07FF);
+        channels[2]  = ((received[3]>>6 |received[4]<<2 |received[5]<<10)  & 0x07FF);
+        channels[3]  = ((received[5]>>1 |received[6]<<7)                 & 0x07FF);
+        channels[4]  = ((received[6]>>4 |received[7]<<4)                 & 0x07FF);
+        channels[5]  = ((received[7]>>7 |received[8]<<1 |received[9]<<9)   & 0x07FF);
+        channels[6]  = ((received[9]>>2 |received[10]<<6)                & 0x07FF);
+        channels[7]  = ((received[10]>>5|received[11]<<3)                & 0x07FF);
+        channels[8]  = ((received[12]   |received[13]<<8)                & 0x07FF);
+        channels[9]  = ((received[13]>>3|received[14]<<5)                & 0x07FF);
+        channels[10] = ((received[14]>>6|received[15]<<2|received[16]<<10) & 0x07FF);
+        channels[11] = ((received[16]>>1|received[17]<<7)                & 0x07FF);
+        channels[12] = ((received[17]>>4|received[18]<<4)                & 0x07FF);
+        channels[13] = ((received[18]>>7|received[19]<<1|received[20]<<9)  & 0x07FF);
+        channels[14] = ((received[20]>>2|received[21]<<6)                & 0x07FF);
+        channels[15] = ((received[21]>>5|received[22]<<3)                & 0x07FF);
     }
 	
     recv_counter = 0;
