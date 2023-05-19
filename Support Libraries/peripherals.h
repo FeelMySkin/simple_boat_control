@@ -39,7 +39,7 @@
  * 
  */
 #define MOTOR_TIM       TIM1
-#define MOTOR_TIM_CH    LL_TIM_CHANNEL_CH1
+#define MOTOR_TIM_CH    LL_TIM_CHANNEL_CH2
 #define SERVO_TIM       TIM14
 #define SERVO_TIM_CH    LL_TIM_CHANNEL_CH1
 

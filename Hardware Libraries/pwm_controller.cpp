@@ -29,6 +29,7 @@ void PwmController::InitTIM(PwmController_InitTypeDef* init)
     tim.RepetitionCounter = 0;
     tim.Prescaler = CountPrescaler(init->pwm_freq);
     tim.Autoreload = this->init.desired_resolution;
+	tim.CounterMode = LL_TIM_COUNTERMODE_UP;
     LL_TIM_Init(init->pwm_tim,&tim);
 
     LL_TIM_OC_InitTypeDef oc;
@@ -42,6 +43,7 @@ void PwmController::InitTIM(PwmController_InitTypeDef* init)
 	LL_TIM_EnableCounter(init->pwm_tim);
 	LL_TIM_CC_EnableChannel(init->pwm_tim,init->pwm_ch);
 	LL_TIM_EnableAllOutputs(init->pwm_tim);
+	LL_TIM_EnableAutomaticOutput(init->pwm_tim);
 }
 
 uint32_t PwmController::CountPrescaler(uint32_t freq)
