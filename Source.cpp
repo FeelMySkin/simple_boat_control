@@ -40,7 +40,7 @@ int main()
 	//while(1) asm("NOP");
     while(1)
     {
-        servo_pwm.SetDuty(Map<float>(crsf.mapped_channels[SERVO_CH],0.f,2048.f,MIN_PERCENT,MAX_PERCENT));
+        servo_pwm.SetDuty(Map<float>(crsf.mapped_channels[SERVO_CH],2048.f,0.f,MIN_PERCENT,MAX_PERCENT));
         //motor_pwm.SetDuty(test_duty);
         //servo_pwm.SetDuty((sbus.mapped_channels[SERVO_CH]/2048.0f)*100.0f);
         if(crsf.mapped_channels[ARM_CH]<=500 || crsf.stat.uplinkLQ <=5)
